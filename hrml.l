@@ -2,7 +2,7 @@
     #include <stdio.h>
 %}
 
-tag_names [a-z0-9]*
+tag_names [a-z0-9]+
 
 %%
 
