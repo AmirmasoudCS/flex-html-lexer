@@ -5,20 +5,20 @@
 digit [0-9]
 lower [a-z]
 upper [A-Z]
-whitespace [ \t]
+whitespace [ \t\n]
 
 letter {upper}|{lower}
 
 word {letter}+
 
 sentence ({word}|{whitespace})*
-tag_names ({letter}|{digit})*
+tag_names ({letter}|{digit})+
 
 
 
 %%
 
-"<!-- "{sentence}" -->"     {printf("COMMENT", yytext);}
+"<!--"{sentence}"-->"     {printf("COMMENT", yytext);}
 "<"{tag_names}">"           {printf("OPENING %s TAG ", yytext);}
 "</"{tag_names}">"          {printf("CLOSING %s TAG", yytext);}
 "<"{tag_names}[ \t]*"/>"    {printf("SELF CLOSING %s TAG", yytext);}
