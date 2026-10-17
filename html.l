@@ -18,10 +18,11 @@ tag_names ({letter}|{digit})*
 
 %%
 
+"<!-- "{sentence}" -->"     {printf("COMMENT", yytext);}
 "<"{tag_names}">"           {printf("OPENING %s TAG ", yytext);}
 "</"{tag_names}">"          {printf("CLOSING %s TAG", yytext);}
 "<"{tag_names}[ \t]*"/>"    {printf("SELF CLOSING %s TAG", yytext);}
-"<!-- "{sentence}" -->"     {printf("COMMENT", yytext);}
+
 
 
 %%
