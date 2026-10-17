@@ -7,7 +7,7 @@ tag_names [a-z0-9]+
 %%
 
 "<"{tag_names}">"   {printf("OPENING %s TAG ", yytext);}
-
+"<"/{tag_names}">"  {printf("CLOSING %s TAG", yytext);}
 
 
 %%
