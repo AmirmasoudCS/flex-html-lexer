@@ -2,7 +2,9 @@
     #include <stdio.h>
 %}
 
-tag_names [a-z0-9]+
+digit [0-9]
+letter [a-zA-Z]
+tag_names ({letter}|{digit})*
 
 %%
 
