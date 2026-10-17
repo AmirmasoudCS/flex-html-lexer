@@ -3,14 +3,26 @@
 %}
 
 digit [0-9]
-letter [a-zA-Z]
+lower [a-z]
+upper [A-Z]
+whitespace [ \t]
+
+letter {upper}|{lower}
+
+word {letter}+
+
+sentence ({word}|{whitespace})*
 tag_names ({letter}|{digit})*
+
+
 
 %%
 
 "<"{tag_names}">"           {printf("OPENING %s TAG ", yytext);}
 "</"{tag_names}">"          {printf("CLOSING %s TAG", yytext);}
 "<"{tag_names}[ \t]*"/>"    {printf("SELF CLOSING %s TAG", yytext);}
+"<!-- "{sentence}" -->"     {printf("COMMENT", yytext);}
+
 
 %%
 
