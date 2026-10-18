@@ -1,6 +1,9 @@
+
 %{
     #include <stdio.h>
 %}
+
+%x COMMENT
 
 digit [0-9]
 lower [a-z]
@@ -9,29 +12,25 @@ whitespace [ \t\n]
 punct [.,!?;:]
 
 letter {upper}|{lower}
-
 word {letter}+
-
-sentence ({word}|{whitespace}|punct)*
+sentence ({word}|{whitespace}|{punct})*
 tag_names ({letter}|{digit})+
-
-
-
-%%
-
-"<!--"{sentence}"-->"     {printf("COMMENT %s", yytext);}
-"<"{tag_names}">"           {printf("OPENING %s TAG ", yytext);}
-"</"{tag_names}">"          {printf("CLOSING %s TAG", yytext);}
-"<"{tag_names}[ \t]*"/>"    {printf("SELF CLOSING %s TAG", yytext);}
-
-
+closing_comment "-->"
 
 %%
 
-yywrap(void) {return 1;}
+"<!--"^{closing_comment}"-->" { printf("COMMENT %s", yytext); }
+"<"{tag_names}">"              { printf("OPENING %s TAG ", yytext); }
+"</"{tag_names}">"             { printf("CLOSING %s TAG", yytext); }
+"<"{tag_names}[ \t]*"/>"       { printf("SELF CLOSING %s TAG", yytext); }
 
-int main(void){
+%%
 
+int yywrap(void) {
+    return 1;
+}
+
+int main(void) {
     yylex();
     return 0;
 }
