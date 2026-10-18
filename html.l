@@ -5,7 +5,7 @@
 
 %x COMMENT
 
-%x DOCKTYPE
+%x DOCTYPE
 
 digit [0-9]
 lower [a-z]
@@ -22,10 +22,10 @@ closing_comment "-->"
 %%
 
 
-"<!DOCKTYPE"                   { BEGIN(DOCKTYPE);}
-<DOCKTYPE>">"                  { BEGIN(INITIAL);}
-<DOCKTYPE>.                    {}
-<DOCKTYPE>\n                   {}
+"<!DOCTYPE"                   { BEGIN(DOCTYPE);}
+<DOCTYPE>">"                  { BEGIN(INITIAL);}
+<DOCTYPE>.                    {}
+<DOCTYPE>\n                   {}
 "<!--"                         { BEGIN(COMMENT); }
 <COMMENT>"-->"                 { printf("COMMENT"); BEGIN(INITIAL);}
 <COMMENT>.                     {}
