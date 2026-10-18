@@ -23,7 +23,7 @@ closing_comment "-->"
 
 
 "<!DOCTYPE"                   { BEGIN(DOCTYPE);}
-<DOCTYPE>">"                  { BEGIN(INITIAL);}
+<DOCTYPE>">"                  { printf("DOCTYPE"); BEGIN(INITIAL);}
 <DOCTYPE>.                    {}
 <DOCTYPE>\n                   {}
 "<!--"                         { BEGIN(COMMENT); }
