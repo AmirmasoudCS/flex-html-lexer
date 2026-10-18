@@ -19,7 +19,10 @@ closing_comment "-->"
 
 %%
 
-"<!--"^{closing_comment}"-->" { printf("COMMENT %s", yytext); }
+"<!--"                         { BEGIN(COMMENT); }
+<COMMENT>"-->"                 { printf("COMMENT"); BEGIN(INITIAL);}
+<COMMENT>.                     {}
+<COMMENT>\n                    {}
 "<"{tag_names}">"              { printf("OPENING %s TAG ", yytext); }
 "</"{tag_names}">"             { printf("CLOSING %s TAG", yytext); }
 "<"{tag_names}[ \t]*"/>"       { printf("SELF CLOSING %s TAG", yytext); }
