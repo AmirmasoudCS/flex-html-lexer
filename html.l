@@ -20,7 +20,7 @@ punct [.,!?;:]
 letter {upper}|{lower}
 word {letter}+
 sentence ({word}|{whitespace}|{punct})*
-tag_names {letter}({letter}|{digit})+
+tag_names {letter}({letter}|{digit})*
 closing_comment "-->"
 
 %%
@@ -36,9 +36,10 @@ closing_comment "-->"
 <COMMENT>\n                                         {}
 "<"{tag_names}                                      { BEGIN(TAG);}
 <TAG>[ \t]*"class="                                 { printf("CLASS ATTRIBUTE");}
-<TAG>[ \t]*(letter|digit)*"="                       { printf("%s ATTRIBUTE", yytext); BEGIN(ATTRIBUTE_VALUE);}
+<TAG>[ \t]*{letter}({letter}|{digit})*"="           { printf("%s ATTRIBUTE", yytext); BEGIN(ATTRIBUTE_VALUE);}
 <ATTRIBUTE_VALUE>"{letter|digit|whitespace}*"       { printf("ATTRIBUTE VALUE %s", yytext); BEGIN(TAG);}
 <TAG>[ \t]*">"                                      { printf("OPENING %s TAG", yytext);}
+<TAG>[ \t]*"/>"                                     { printf("SELF CLOSING %s TAG", yytext);}
 "<"{tag_names}">"                                   { printf("OPENING %s TAG ", yytext); }
 "</"{tag_names}">"                                  { printf("CLOSING %s TAG", yytext); }
 "<"{tag_names}[ \t]*"/>"                            { printf("SELF CLOSING %s TAG", yytext); }
