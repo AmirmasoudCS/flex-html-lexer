@@ -38,7 +38,7 @@ closing_comment "-->"
 <COMMENT>\n                                         {}
 "<"{tag_names}                                      { strcpy(tag_name, yytext+1); BEGIN(TAG);}
 <TAG>[ \t]*{letter}({letter}|{digit})*"="           { printf("%s ATTRIBUTE", yytext); BEGIN(ATTRIBUTE_VALUE);}
-<ATTRIBUTE_VALUE>\".\"                              { printf("ATTRIBUTE VALUE %s", yytext); BEGIN(TAG);}
+<ATTRIBUTE_VALUE>\"[^"]*\"                              { printf("ATTRIBUTE VALUE %s", yytext); BEGIN(TAG);}
 <TAG>[ \t]*">"                                      { printf("OPENING %s TAG", tag_name); BEGIN(INITIAL);}
 <TAG>[ \t]*"/>"                                     { printf("SELF CLOSING %s TAG", tag_name); BEGIN(INITIAL);}
 "</"{tag_names}">"                                  { printf("CLOSING %s TAG", yytext);}
