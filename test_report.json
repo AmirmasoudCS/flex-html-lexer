@@ -1,0 +1,187 @@
+[
+    {
+        "test_name": "test_boolean_attribute",
+        "input": "<input disabled>",
+        "expected_output": [
+            "BOOLEAN ATTRIBUTE",
+            "OPENING input TAG"
+        ],
+        "generated_output": "BOOLEAN ATTRIBUTE  disabled\nOPENING input TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_closing_tag",
+        "input": "</div>",
+        "expected_output": [
+            "CLOSING </div> TAG"
+        ],
+        "generated_output": "CLOSING </div> TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_comment",
+        "input": "<!-- a comment -->",
+        "expected_output": [
+            "COMMENT"
+        ],
+        "generated_output": "COMMENT\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_complex_doctype",
+        "input": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">",
+        "expected_output": [
+            "DOCTYPE"
+        ],
+        "generated_output": "DOCTYPE\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_doctype",
+        "input": "<!DOCTYPE html>",
+        "expected_output": [
+            "DOCTYPE"
+        ],
+        "generated_output": "DOCTYPE\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_double_quoted_attribute",
+        "input": "<div class=\"container\">",
+        "expected_output": [
+            "ATTRIBUTE NAME",
+            "ATTRIBUTE VALUE \"container\"",
+            "OPENING div TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  class=\nATTRIBUTE VALUE \"container\"\nOPENING div TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_multiline_comment",
+        "input": "<!-- first line\nsecond line -->",
+        "expected_output": [
+            "COMMENT"
+        ],
+        "generated_output": "COMMENT\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_multiple_attributes",
+        "input": "<div id=\"main\" class=\"box\">",
+        "expected_output": [
+            "ATTRIBUTE NAME",
+            "ATTRIBUTE VALUE \"main\"",
+            "ATTRIBUTE VALUE \"box\"",
+            "OPENING div TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  id=\nATTRIBUTE VALUE \"main\"\nATTRIBUTE NAME  class=\nATTRIBUTE VALUE \"box\"\nOPENING div TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_multiple_tags",
+        "input": "<html><body></body></html>",
+        "expected_output": [
+            "OPENING html TAG",
+            "OPENING body TAG",
+            "CLOSING </body> TAG",
+            "CLOSING </html> TAG"
+        ],
+        "generated_output": "OPENING html TAG\nOPENING body TAG\nCLOSING </body> TAG\nCLOSING </html> TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_one_letter_tag",
+        "input": "<p>",
+        "expected_output": [
+            "OPENING p TAG"
+        ],
+        "generated_output": "OPENING p TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_opening_tag",
+        "input": "<div>",
+        "expected_output": [
+            "OPENING div TAG"
+        ],
+        "generated_output": "OPENING div TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_punctuation_in_attribute_value",
+        "input": "<a href=\"https://example.com/page?id=1\">",
+        "expected_output": [
+            "ATTRIBUTE VALUE \"https://example.com/page?id=1\"",
+            "OPENING a TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  href=\nATTRIBUTE VALUE \"https://example.com/page?id=1\"\nOPENING a TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_self_closing_tag",
+        "input": "<img/>",
+        "expected_output": [
+            "SELF CLOSING img TAG"
+        ],
+        "generated_output": "SELF CLOSING img TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_self_closing_tag_with_attribute",
+        "input": "<img src=\"photo.png\"/>",
+        "expected_output": [
+            "ATTRIBUTE VALUE \"photo.png\"",
+            "SELF CLOSING img TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  src=\nATTRIBUTE VALUE \"photo.png\"\nSELF CLOSING img TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_single_quoted_attribute",
+        "input": "<div class='container'>",
+        "expected_output": [
+            "ATTRIBUTE NAME",
+            "ATTRIBUTE VALUE 'container'",
+            "OPENING div TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  class=\nATTRIBUTE VALUE 'container'\nOPENING div TAG\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_tags_inside_comment_are_ignored",
+        "input": "<!-- <div>hidden</div> -->",
+        "expected_output": [
+            "COMMENT"
+        ],
+        "generated_output": "COMMENT\n",
+        "result": "PASS",
+        "error": null
+    },
+    {
+        "test_name": "test_unquoted_attribute",
+        "input": "<div id=main>",
+        "expected_output": [
+            "ATTRIBUTE NAME",
+            "ATTRIBUTE VALUE main",
+            "OPENING div TAG"
+        ],
+        "generated_output": "ATTRIBUTE NAME  id=\nATTRIBUTE VALUE main\nOPENING div TAG\n",
+        "result": "PASS",
+        "error": null
+    }
+]
