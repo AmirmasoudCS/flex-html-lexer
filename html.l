@@ -16,7 +16,7 @@ punct [.,!?;:]
 letter {upper}|{lower}
 word {letter}+
 sentence ({word}|{whitespace}|{punct})*
-tag_names ({letter}|{digit})+
+tag_names {letter}({letter}|{digit})+
 closing_comment "-->"
 
 %%
