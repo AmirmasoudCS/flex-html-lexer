@@ -1,6 +1,8 @@
 
 %{
     #include <stdio.h>
+    #include <string.h>
+    char tag_name[256];
 %}
 
 %x COMMENT
@@ -34,12 +36,12 @@ closing_comment "-->"
 <COMMENT>"-->"                                      { printf("COMMENT"); BEGIN(INITIAL);}
 <COMMENT>.                                          {}
 <COMMENT>\n                                         {}
-"<"{tag_names}                                      { BEGIN(TAG);}
+"<"{tag_names}                                      { strcpy(tag_name, yytext+1); BEGIN(TAG);}
 <TAG>[ \t]*"class="                                 { printf("CLASS ATTRIBUTE");}
 <TAG>[ \t]*{letter}({letter}|{digit})*"="           { printf("%s ATTRIBUTE", yytext); BEGIN(ATTRIBUTE_VALUE);}
 <ATTRIBUTE_VALUE>"{letter|digit|whitespace}*"       { printf("ATTRIBUTE VALUE %s", yytext); BEGIN(TAG);}
 <TAG>[ \t]*">"                                      { printf("OPENING %s TAG", yytext);}
-<TAG>[ \t]*"/>"                                     { printf("SELF CLOSING %s TAG", yytext);}
+<TAG>[ \t]*"/>"                                     { printf("SELF CLOSING %s TAG", tag_name);}
 "<"{tag_names}">"                                   { printf("OPENING %s TAG ", yytext); }
 "</"{tag_names}">"                                  { printf("CLOSING %s TAG", yytext); }
 "<"{tag_names}[ \t]*"/>"                            { printf("SELF CLOSING %s TAG", yytext); }
